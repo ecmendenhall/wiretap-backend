@@ -20,7 +20,7 @@ defmodule Wiretap.Mixfile do
   def application do
     [
       mod: {Wiretap.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :ex_phone_number]
     ]
   end
 
@@ -38,7 +38,8 @@ defmodule Wiretap.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:ex_phone_number, "~> 0.1"}
     ]
   end
 
