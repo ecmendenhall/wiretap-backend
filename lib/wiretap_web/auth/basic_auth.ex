@@ -13,7 +13,8 @@ defmodule WiretapWeb.Auth.BasicAuth do
     else
       conn
       |> Conn.put_resp_header("www-authenticate", "Basic realm=\"#{realm}\"")
-      |> Conn.put_status(:unauthorized)
+      |> Conn.send_resp(:unauthorized, "")
+      |> Conn.halt()
     end
   end
 

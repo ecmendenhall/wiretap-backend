@@ -6,14 +6,14 @@ defmodule Twilio do
     |> send_request()
   end
 
-  def call_request(to) do
+  def call_request(%{to: to, url: url}) do
     %Request{
       method: :post,
       resource: path("Calls.json"),
     }
     |> Request.add_param("To", to)
     |> Request.add_param("From", outgoing_number())
-    |> Request.add_param("Url", "https://example.com")
+    |> Request.add_param("Url", url)
     |> Request.to_tuple
   end
 
@@ -43,7 +43,7 @@ defmodule Twilio do
         {:basic_auth, {account_sid(), auth_token()}}
       ]
     ) do
-      {:ok, %HTTPoison.Response{status_code: 201, body: body} = response} ->
+      {:ok, %HTTPoison.Response{status_code: 201, body: body}} ->
         Poison.decode(body)
       {:ok, %HTTPoison.Response{body: body}} ->
         {:ok, body} = Poison.decode(body)

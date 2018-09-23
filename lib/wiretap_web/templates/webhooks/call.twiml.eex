@@ -4,4 +4,5 @@
   We're up all night to get spooky.
   We're up all night to get spoooooooky!
   </Say>
+  <Dial record="record-from-ringing"><%= @call.contact.phone_number %></Dial>
 </Response>
