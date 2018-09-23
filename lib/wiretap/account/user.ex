@@ -9,6 +9,9 @@ defmodule Wiretap.Account.User do
     field :username, :string
     field :phone_number, :string
 
+    has_many :contacts, Wiretap.Contacts.Contact
+    has_many :calls, Wiretap.Calls.Call
+
     timestamps()
   end
 

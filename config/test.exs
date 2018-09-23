@@ -17,3 +17,8 @@ config :wiretap, Wiretap.Repo,
   database: "wiretap_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :wiretap,
+  twilio_account_sid: "test-twilio-account-sid",
+  twilio_auth_token: "test-twilio-auth-token",
+  twilio_outgoing_number: "+15207294567"
