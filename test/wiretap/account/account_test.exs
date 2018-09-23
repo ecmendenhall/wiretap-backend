@@ -4,12 +4,14 @@ defmodule Wiretap.Account.AccountTest do
   alias Wiretap.Account
   alias Wiretap.Account.User
 
+  @valid_attrs %{
+    name: "Flop Chonkenton",
+    username: "flopchonk"
+  }
+
   describe "creating a user" do
     test "creates a user with valid attributes" do
-      {:ok, user} = Account.create_user(%{
-        name: "Flop Chonkenton",
-        username: "flopchonk"
-      })
+      {:ok, user} = Account.create_user(@valid_attrs)
       assert %User{name: "Flop Chonkenton", username: "flopchonk"} = user
       refute user.inserted_at == nil
       refute user.updated_at == nil
@@ -23,10 +25,7 @@ defmodule Wiretap.Account.AccountTest do
 
   describe "getting a user" do
     test "gets a user when it exists" do
-      {:ok, created_user} = Account.create_user(%{
-        name: "Flop Chonkenton",
-        username: "flopchonk"
-      })
+      {:ok, created_user} = Account.create_user(@valid_attrs)
       assert created_user = Account.get_user(created_user.id)
     end
 

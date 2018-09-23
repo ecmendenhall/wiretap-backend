@@ -3,15 +3,12 @@ defmodule Wiretap.Contacts.ContactsTest do
 
   alias Wiretap.Contacts
   alias Wiretap.Contacts.Contact
-  alias Wiretap.Account
+  alias Wiretap.Factory
 
   describe "creating a contact" do
 
     test "creates a contact" do
-      {:ok, user} = Account.create_user(%{
-        name: "Flop Chonkenton",
-        username: "flopchonk",
-      })
+      user = Factory.user()
       {:ok, contact} = Contacts.create_contact(%{
         name: "Hot Saucerman",
         phone_number: "916-225-5887",
@@ -24,10 +21,7 @@ defmodule Wiretap.Contacts.ContactsTest do
   describe "getting a contact" do
 
     test "gets a contact when it exists" do
-      {:ok, user} = Account.create_user(%{
-        name: "Flop Chonkenton",
-        username: "flopchonk",
-      })
+      user = Factory.user()
       {:ok, created_contact} = Contacts.create_contact(%{
         name: "Hot Saucerman",
         phone_number: "916-225-5887",

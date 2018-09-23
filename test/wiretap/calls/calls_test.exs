@@ -1,25 +1,17 @@
-defmodule Wiretap.Callss.CallsTest do
+defmodule Wiretap.Calls.CallsTest do
   use Wiretap.DataCase
 
+  alias Wiretap.Factory
   alias Wiretap.Calls
   alias Wiretap.Calls.Call
-  alias Wiretap.Account
-  alias Wiretap.Contacts
 
   describe "creating a call" do
 
     test "creates a call" do
-      {:ok, user} = Account.create_user(%{
-        name: "Flop Chonkenton",
-        username: "flopchonk",
-      })
-      {:ok, contact} = Contacts.create_contact(%{
-        name: "Hot Saucerman",
-        phone_number: "916-225-5887",
-      }, user)
-      {:ok, call} = Calls.create_call(user, contact)
+      contact = Factory.contact()
+      {:ok, call} = Calls.create_call(contact.user, contact)
       assert %Call{} = call
-      assert call.user == user
+      assert call.user == contact.user
       assert call.contact == contact
     end
   end
@@ -27,15 +19,8 @@ defmodule Wiretap.Callss.CallsTest do
   describe "getting a call" do
 
     test "gets a call" do
-      {:ok, user} = Account.create_user(%{
-        name: "Flop Chonkenton",
-        username: "flopchonk",
-      })
-      {:ok, contact} = Contacts.create_contact(%{
-        name: "Hot Saucerman",
-        phone_number: "916-225-5887",
-      }, user)
-      {:ok, created_call} = Calls.create_call(user, contact)
+      contact = Factory.contact()
+      {:ok, created_call} = Calls.create_call(contact.user, contact)
       assert created_call = Calls.get_call(created_call.id)
     end
 
