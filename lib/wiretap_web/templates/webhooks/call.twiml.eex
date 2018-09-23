@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
   <Say>
-  We're up all night to get spooky.
-  We're up all night to get spoooooooky!
+    This is an automated call from Wiretap. This call will be recorded.
   </Say>
-  <Dial record="record-from-ringing"><%= @call.contact.phone_number %></Dial>
+  <Dial
+    record="record-from-ringing"
+recordingStatusCallback="<%= "https://twilio:test-password@bb74a991.ngrok.io/webhooks/calls/#{@call.id}/complete" %>" >
+    <%= @call.contact.phone_number %>
+  </Dial>
 </Response>

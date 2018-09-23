@@ -4,6 +4,7 @@ defmodule Wiretap.Calls.Call do
 
   schema "calls" do
     field :recording_url, :string
+    field :sid, :string
 
     belongs_to :user, Wiretap.Account.User
     belongs_to :contact, Wiretap.Contacts.Contact
@@ -11,8 +12,8 @@ defmodule Wiretap.Calls.Call do
     timestamps()
   end
 
-  def changeset(call) do
+  def changeset(call, attrs) do
     call
-    |> cast(%{}, [:recording_url])
+    |> cast(attrs, [:recording_url, :sid])
   end
 end

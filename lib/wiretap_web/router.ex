@@ -13,12 +13,22 @@ defmodule WiretapWeb.Router do
       password: "test-password"
   end
 
+  pipeline :feeds do
+    plug :accepts, ["xml"]
+  end
+
   scope "/api", WiretapWeb do
     pipe_through :api
   end
 
   scope "/webhooks", WiretapWeb do
     pipe_through :webhooks
-    post "/call/:id", WebhooksController, :connect_call
+    post "/calls/:id/dial", WebhooksController, :dial
+    post "/calls/:id/complete", WebhooksController, :complete
+  end
+
+  scope "/feeds", WiretapWeb do
+    pipe_through :feeds
+    get "/:username", FeedsController, :show
   end
 end

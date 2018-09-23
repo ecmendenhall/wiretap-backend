@@ -1,0 +1,37 @@
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Wiretap</title>
+    <link>https://www.example.com</link>
+    <image>
+      <url>http://www.placecage.com/640/640.jpg</url>
+      <title>Wiretap</title>
+      <link>https://www.example.com</link>
+    </image>
+    <description>
+      Wiretap
+    </description>
+    <language>en-us</language>
+    <copyright></copyright>
+    <atom:link href="https://80ee84e6.ngrok.io/feeds/ecm" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Fri, 01 Jan 2016 06:00:00 PDT</lastBuildDate>
+    <itunes:author>Connor Mendenhall</itunes:author>
+    <itunes:summary>
+      Wiretap
+    </itunes:summary>
+    <itunes:subtitle>wiretap</itunes:subtitle>
+    <itunes:owner>
+      <itunes:name>Connor Mendenhall</itunes:name>
+      <itunes:email>connor@terminally.online</itunes:email>
+    </itunes:owner>
+    <itunes:explicit>No</itunes:explicit>
+    <itunes:keywords>
+      wiretap
+    </itunes:keywords>
+    <itunes:image href="http://www.placecage.com/720/720.jpg"/>
+    <itunes:category text="Technology"/>
+    <pubDate>Fri, 01 Jan 2016 06:00:00 PDT</pubDate>
+    <%= for item <- @user.calls do %>
+      <%= render "episode.xml", item: item %>
+    <% end %>
+  </channel>
+</rss>

@@ -31,4 +31,19 @@ defmodule Wiretap.Calls.CallsTest do
     end
 
   end
+
+  describe "updating a call" do
+
+    test "updates call attributes" do
+      contact = Factory.contact()
+      {:ok, created_call} = Calls.create_call(contact.user, contact)
+      {:ok, updated_call} = Calls.update_call(created_call, %{
+        sid: "abc123",
+        recording_url: "https://example.com/recording.mp3"
+      })
+      assert updated_call.sid == "abc123"
+      assert updated_call.recording_url == "https://example.com/recording.mp3"
+    end
+
+  end
 end
