@@ -1,7 +1,10 @@
 defmodule Wiretap.Account.UserTest do
   use Wiretap.DataCase
 
+  alias Wiretap.Factory
+  alias Wiretap.Repo
   alias Wiretap.Account.User
+  alias Wiretap.Account
 
   test "user schema" do
     user = %User{
@@ -57,6 +60,16 @@ defmodule Wiretap.Account.UserTest do
       assert %Ecto.Changeset{changes: changes} = changeset
       assert changes.phone_number == "+15555553226"
     end
+  end
+
+  describe "associations" do
+
+    test "has one feed" do
+      feed = Factory.feed()
+      user = Account.get_user(feed.user.id) |> Repo.preload(:feed)
+      assert user.feed.id == feed.id
+    end
+
   end
 
 end

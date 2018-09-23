@@ -1,5 +1,5 @@
 defmodule Wiretap.Factory do
-  alias Wiretap.{Account, Calls, Contacts}
+  alias Wiretap.{Account, Calls, Contacts, Feeds}
 
   def user(attrs \\ %{}) do
     defaults = %{
@@ -9,6 +9,19 @@ defmodule Wiretap.Factory do
     }
     {:ok, user} = Account.create_user(Map.merge(defaults, attrs))
     user
+  end
+
+  def feed(attrs \\ %{}, existing_user \\ nil) do
+    associated_user = if existing_user do
+      existing_user
+    else
+      user()
+    end
+    defaults = %{
+      name: "#{associated_user.name}'s Feed",
+    }
+    {:ok, feed} = Feeds.create_feed(Map.merge(defaults, attrs), associated_user)
+    feed
   end
 
   def contact(attrs \\ %{}, existing_user \\ nil) do

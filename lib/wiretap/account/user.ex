@@ -11,6 +11,7 @@ defmodule Wiretap.Account.User do
 
     has_many :contacts, Wiretap.Contacts.Contact
     has_many :calls, Wiretap.Calls.Call
+    has_one :feed, Wiretap.Feeds.Feed
 
     timestamps()
   end

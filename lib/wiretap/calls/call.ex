@@ -8,6 +8,7 @@ defmodule Wiretap.Calls.Call do
 
     belongs_to :user, Wiretap.Account.User
     belongs_to :contact, Wiretap.Contacts.Contact
+    belongs_to :entry, Wiretap.Feeds.Entry
 
     timestamps()
   end

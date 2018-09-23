@@ -45,7 +45,10 @@ defmodule Wiretap.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:ex_phone_number, "~> 0.1"},
-      {:httpoison, "~> 1.0"}
+      {:httpoison, "~> 1.0"},
+      {:absinthe, "~> 1.4"},
+      {:absinthe_plug, "~> 1.4"},
+      {:poison, "~> 3.1"}
     ]
   end
 

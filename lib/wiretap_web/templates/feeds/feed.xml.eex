@@ -28,7 +28,9 @@
       wiretap
     </itunes:keywords>
     <itunes:image href="http://www.placecage.com/720/720.jpg"/>
-    <itunes:category text="Technology"/>
+    <itunes:category text="Society & Culture">
+      <itunes:category text="Personal Journals">
+    </itunes:category>
     <pubDate>Fri, 01 Jan 2016 06:00:00 PDT</pubDate>
     <%= for item <- @user.calls do %>
       <%= render "episode.xml", item: item %>
