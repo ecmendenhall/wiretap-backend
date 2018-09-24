@@ -18,10 +18,34 @@ defmodule Wiretap.Factory do
       user()
     end
     defaults = %{
-      name: "#{associated_user.name}'s Feed",
+      title: "#{associated_user.name}'s Feed",
+      summary: "Just another cool feed",
+      keywords: "key, words",
+      is_explicit: false
     }
     {:ok, feed} = Feeds.create_feed(Map.merge(defaults, attrs), associated_user)
     feed
+  end
+
+  def entry(attrs \\ %{}, existing_feed \\ nil, existing_call \\ nil) do
+    associated_feed = if existing_feed do
+      existing_feed
+    else
+      feed()
+    end
+    associated_call = if existing_call do
+      existing_call
+    else
+      call(associated_feed.user)
+    end
+    defaults = %{
+      title: "Feed entry",
+      summary: "Just another cool entry",
+      keywords: "key, words",
+      is_explicit: false
+    }
+    {:ok, entry} = Feeds.create_entry(Map.merge(defaults, attrs), associated_feed, associated_call)
+    entry
   end
 
   def contact(attrs \\ %{}, existing_user \\ nil) do

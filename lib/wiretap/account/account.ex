@@ -12,4 +12,8 @@ defmodule Wiretap.Account do
     Repo.get!(User, id)
   end
 
+  def get_last_user() do
+    List.last(Repo.all(User))
+  end
+
 end

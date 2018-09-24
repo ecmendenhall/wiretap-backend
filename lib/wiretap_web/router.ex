@@ -17,8 +17,9 @@ defmodule WiretapWeb.Router do
     plug :accepts, ["xml"]
   end
 
-  scope "/api", WiretapWeb do
+  scope "/api" do
     pipe_through :api
+    forward "/graphql", Absinthe.Plug, schema: WiretapWeb.Schema
   end
 
   scope "/webhooks", WiretapWeb do
@@ -31,4 +32,7 @@ defmodule WiretapWeb.Router do
     pipe_through :feeds
     get "/:username", FeedsController, :show
   end
+
+  forward "/graphiql", Absinthe.Plug.GraphiQL, schema: WiretapWeb.Schema,
+      interface: :simple
 end
