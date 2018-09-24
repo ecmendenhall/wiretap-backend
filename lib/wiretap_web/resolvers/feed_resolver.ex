@@ -1,5 +1,4 @@
 defmodule WiretapWeb.Resolvers.Feed do
-  alias Wiretap.Account.User
   alias Wiretap.Feeds.Feed
   alias Wiretap.Repo
 

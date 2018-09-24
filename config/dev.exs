@@ -44,9 +44,3 @@ config :wiretap, Wiretap.Repo,
   database: "wiretap_dev",
   hostname: "localhost",
   pool_size: 10
-
-
-config :wiretap,
-  twilio_account_sid: "",
-  twilio_auth_token: "",
-  twilio_outgoing_number: "+15207294567"

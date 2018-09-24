@@ -33,9 +33,23 @@ defmodule Wiretap.Calls do
   def start(call) do
     Twilio.call!(%{
       to: call.user.phone_number,
-      url: "https://twilio:test-password@bb74a991.ngrok.io/webhooks/calls/#{call.id}/dial"
+      url: dial_webhook(call)
     })
   end
 
+  def recording_webhook(%Call{id: id}) do
+    "#{base_url()}/webhooks/calls/#{id}/complete"
+  end
+
+  def dial_webhook(%Call{id: id}) do
+    "#{base_url()}/webhooks/calls/#{id}/dial"
+  end
+
+  defp base_url do
+    hostname = Application.get_env(:wiretap, :hostname)
+    username = Application.get_env(:wiretap, :twilio_basic_auth_username)
+    password = Application.get_env(:wiretap, :twilio_basic_auth_password)
+    "http://#{username}:#{password}@#{hostname}"
+  end
 
 end

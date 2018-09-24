@@ -1,5 +1,4 @@
 defmodule WiretapWeb.Resolvers.Entry do
-  alias Wiretap.Calls.Call
   alias Wiretap.Feeds.Entry
   alias Wiretap.Repo
 

@@ -5,7 +5,7 @@
   </Say>
   <Dial
     record="record-from-ringing"
-recordingStatusCallback="<%= "https://twilio:test-password@bb74a991.ngrok.io/webhooks/calls/#{@call.id}/complete" %>" >
+    recordingStatusCallback="<%= @callback %>" >
     <%= @call.contact.phone_number %>
   </Dial>
 </Response>
