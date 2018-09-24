@@ -1,11 +1,14 @@
 defmodule WiretapWeb.FeedsController do
   use WiretapWeb, :controller
   alias Wiretap.Account
-  alias Wiretap.Repo
+  alias WiretapWeb.Presenters.FeedPresenter
 
-  def show(conn, %{"username" => _username}) do
-    user = Account.get_user(1) |> Repo.preload(:calls)
-    conn |> put_resp_content_type("text/xml") |> render("feed.xml", user: user)
+  def show(conn, %{"username" => username}) do
+    user = Account.get_by_username(username)
+    %{feed: feed} = FeedPresenter.gather_attrs(user)
+    conn
+    |> put_resp_content_type("text/xml")
+    |> render("feed.xml", feed: feed)
   end
 
 end

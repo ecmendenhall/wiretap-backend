@@ -1,39 +1,45 @@
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Wiretap</title>
-    <link>https://www.example.com</link>
+    <title><%= @feed.title %></title>
+    <link><%= @feed.link %></link>
     <image>
-      <url>http://www.placecage.com/640/640.jpg</url>
-      <title>Wiretap</title>
-      <link>https://www.example.com</link>
+      <url><%= @feed.image %></url>
+      <title><%= @feed.title %></title>
+      <link><%= @feed.link %></link>
     </image>
     <description>
-      Wiretap
+    <![CDATA[
+      <%= @feed.summary %>
+      <br/>
+      <hr/>
+      Created with <a href="https://wiretap.live/">https://wiretap.live/</a>
+    ]]>
     </description>
     <language>en-us</language>
-    <copyright></copyright>
-    <atom:link href="https://80ee84e6.ngrok.io/feeds/ecm" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Fri, 01 Jan 2016 06:00:00 PDT</lastBuildDate>
-    <itunes:author>Connor Mendenhall</itunes:author>
+    <copyright><%= @feed.copyright %></copyright>
+    <atom:link href="<%= @feed.link %>" rel="self" type="application/rss+xml"/>
+    <lastBuildDate><%= @feed.last_build %></lastBuildDate>
+    <itunes:author>wiretap.live</itunes:author>
     <itunes:summary>
-      Wiretap
+    <![CDATA[
+      <%= @feed.summary %>
+    ]]>
     </itunes:summary>
-    <itunes:subtitle>wiretap</itunes:subtitle>
+    <itunes:subtitle>wiretap.live</itunes:subtitle>
     <itunes:owner>
-      <itunes:name>Connor Mendenhall</itunes:name>
-      <itunes:email>connor@terminally.online</itunes:email>
+      <itunes:name><%= @feed.author %></itunes:name>
+      <itunes:email>email@example.com</itunes:email>
     </itunes:owner>
-    <itunes:explicit>No</itunes:explicit>
-    <itunes:keywords>
-      wiretap
-    </itunes:keywords>
-    <itunes:image href="http://www.placecage.com/720/720.jpg"/>
-    <itunes:category text="Society & Culture">
-      <itunes:category text="Personal Journals">
+    <itunes:explicit><%= @feed.explicit %></itunes:explicit>
+    <itunes:keywords><%= @feed.keywords %></itunes:keywords>
+    <itunes:image href="<%= @feed.image %>"/>
+    <itunes:category text="Society &amp; Culture">
+      <itunes:category text="Personal Journals" />
     </itunes:category>
-    <pubDate>Fri, 01 Jan 2016 06:00:00 PDT</pubDate>
-    <%= for item <- @user.calls do %>
-      <%= render "episode.xml", item: item %>
+    <itunes:type>episodic</itunes:type>
+    <pubDate><%= @feed.last_update %></pubDate>
+    <%= for entry <- @feed.entries do %>
+      <%= render "entry.xml", entry: entry %>
     <% end %>
   </channel>
 </rss>

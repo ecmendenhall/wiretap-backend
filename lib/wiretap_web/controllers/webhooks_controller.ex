@@ -12,7 +12,7 @@ defmodule WiretapWeb.WebhooksController do
 
   def complete(conn, %{"id" => id, "RecordingUrl" => recording_url}) do
     call = Calls.get_call(id)
-    {:ok, call} = Calls.update_call(call, %{recording_url: recording_url})
+    {:ok, _call} = Calls.update_call(call, %{recording_url: recording_url})
     conn
     |> send_resp(:ok, "")
   end

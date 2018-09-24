@@ -24,7 +24,8 @@ defmodule Wiretap.Mixfile do
         :logger,
         :runtime_tools,
         :ex_phone_number,
-        :httpoison
+        :httpoison,
+        :timex
       ]
     ]
   end
@@ -48,7 +49,8 @@ defmodule Wiretap.Mixfile do
       {:httpoison, "~> 1.0"},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:timex, "~> 3.1"}
     ]
   end
 

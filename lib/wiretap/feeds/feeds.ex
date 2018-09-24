@@ -19,5 +19,9 @@ defmodule Wiretap.Feeds do
     |> Repo.insert
   end
 
+  def get_entry(id) do
+    Repo.get!(Entry, id)
+  end
+
 end
 

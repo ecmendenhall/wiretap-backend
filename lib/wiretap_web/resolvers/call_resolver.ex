@@ -1,5 +1,4 @@
 defmodule WiretapWeb.Resolvers.Call do
-  alias Wiretap.Account.User
   alias Wiretap.Calls.Call
   alias Wiretap.Repo
 

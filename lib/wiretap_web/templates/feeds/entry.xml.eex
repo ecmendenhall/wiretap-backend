@@ -1,0 +1,26 @@
+<item>
+  <title><%= @entry.title %></title>
+  <link>
+    <%= @entry.media_url %>
+  </link>
+  <pubDate><%= @entry.published %></pubDate>
+  <description>
+  <![CDATA[
+    <%= @entry.summary %>
+    <br/>
+    <hr/>
+    Created with <a href="https://www.wiretap.live/">https://www.wiretap.live/</a>
+  ]]>
+  </description>
+  <enclosure url="<%= @entry.media_url %>" length="0" type="audio/mpeg"/>
+  <guid><%= @entry.media_url %></guid>
+  <itunes:summary>
+  <![CDATA[
+    <%= @entry.summary %>
+  ]]>
+  </itunes:summary>
+  <itunes:author>wiretap.live</itunes:author>
+  <itunes:image href="<%= @entry.image %>"/>
+  <itunes:keywords><%= @entry.keywords %></itunes:keywords>
+  <itunes:explicit><%= @entry.explicit %></itunes:explicit>
+</item>
