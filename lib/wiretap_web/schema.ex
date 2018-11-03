@@ -8,6 +8,18 @@ defmodule WiretapWeb.Schema do
     end
   end
 
+  mutation do
+    field :create_contact, :contact do
+      arg :input, non_null(:contact_input)
+      resolve &Resolvers.Contact.create_contact/3
+    end
+  end
+
+  input_object :contact_input do
+    field :name, non_null(:string)
+    field :phone_number, non_null(:string)
+  end
+
   object :user do
     field :id, :id
     field :name, :string
