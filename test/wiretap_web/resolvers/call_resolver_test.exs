@@ -83,5 +83,36 @@ defmodule WiretapWeb.Resolvers.CallTest do
         }
       }
     end
+
+    @query """
+    mutation ($callInput: CallInput!) {
+      startCall(input: $callInput) {
+        id
+        recordingUrl
+        sid
+      }
+    }
+    """
+    test "starts a call", %{conn: conn} do
+      contact = Factory.contact() |> Repo.preload([:user])
+      call_input = %{
+        "contactId" => contact.id
+      }
+      conn = post conn, "/api/graphql", %{
+        query: @query,
+        variables: %{
+          "callInput" => call_input
+        }
+      }
+      user = contact.user |> Repo.preload([:calls])
+      [call] = user.calls
+      assert json_response(conn, 200)["data"] == %{
+        "startCall" => %{
+          "id" => "#{call.id}",
+          "recordingUrl" => call.recording_url,
+          "sid" => call.sid
+        }
+      }
+    end
   end
 end

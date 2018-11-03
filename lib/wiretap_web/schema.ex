@@ -13,6 +13,15 @@ defmodule WiretapWeb.Schema do
       arg :input, non_null(:contact_input)
       resolve &Resolvers.Contact.create_contact/3
     end
+
+    field :start_call, :call do
+      arg :input, non_null(:call_input)
+      resolve &Resolvers.Call.start_call/3
+    end
+  end
+
+  input_object :call_input do
+    field :contact_id, non_null(:id)
   end
 
   input_object :contact_input do
