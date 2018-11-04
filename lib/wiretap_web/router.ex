@@ -34,5 +34,5 @@ defmodule WiretapWeb.Router do
     get "/:username", FeedsController, :show
   end
 
-  forward "/", Absinthe.Plug.GraphiQL, schema: WiretapWeb.Schema
+  forward "/graphiql", Absinthe.Plug.GraphiQL, schema: WiretapWeb.Schema
 end
