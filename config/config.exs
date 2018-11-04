@@ -30,6 +30,8 @@ config :wiretap,
   twilio_basic_auth_username: System.get_env("TWILIO_BASIC_AUTH_USERNAME"),
   twilio_basic_auth_password: System.get_env("TWILIO_BASIC_AUTH_PASSWORD")
 
+config :comeonin, Ecto.Password, Comeonin.Bcrypt
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

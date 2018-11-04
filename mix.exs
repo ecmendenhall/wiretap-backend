@@ -50,7 +50,10 @@ defmodule Wiretap.Mixfile do
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
       {:poison, "~> 3.1"},
-      {:timex, "~> 3.1"}
+      {:timex, "~> 3.1"},
+      {:comeonin, "~> 4.1"},
+      {:bcrypt_elixir, "~> 1.0"},
+      {:comeonin_ecto_password, git: "https://github.com/vic/comeonin_ecto_password"}
     ]
   end
 

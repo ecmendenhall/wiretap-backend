@@ -3,6 +3,7 @@ defmodule WiretapWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug WiretapWeb.Context
   end
 
   pipeline :webhooks do
@@ -33,6 +34,5 @@ defmodule WiretapWeb.Router do
     get "/:username", FeedsController, :show
   end
 
-  forward "/graphiql", Absinthe.Plug.GraphiQL, schema: WiretapWeb.Schema,
-      interface: :simple
+  forward "/graphiql", Absinthe.Plug.GraphiQL, schema: WiretapWeb.Schema
 end

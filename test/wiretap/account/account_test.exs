@@ -6,7 +6,8 @@ defmodule Wiretap.Account.AccountTest do
 
   @valid_attrs %{
     name: "Flop Chonkenton",
-    username: "flopchonk"
+    username: "flopchonk",
+    password: "hunter2"
   }
 
   describe "creating a user" do

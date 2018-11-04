@@ -24,3 +24,5 @@ config :wiretap,
   twilio_outgoing_number: "+15207294567",
   twilio_username: "twilio",
   twilio_password: "test-password"
+
+config :bcrypt_elixir, :log_rounds, 4

@@ -2,8 +2,6 @@ defmodule WiretapWeb.Resolvers.ContactTest do
   use WiretapWeb.ConnCase
 
   alias Wiretap.Factory
-  alias Wiretap.Repo
-  alias Wiretap.Contacts
 
   describe "contacts" do
 
@@ -16,7 +14,7 @@ defmodule WiretapWeb.Resolvers.ContactTest do
     }
     """
     test "creates a contact", %{conn: conn} do
-      user = Factory.user()
+      Factory.user()
       contact = %{
         "name" => "New Contact",
         "phoneNumber" => "+1 555 222 1234"

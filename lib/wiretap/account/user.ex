@@ -8,6 +8,7 @@ defmodule Wiretap.Account.User do
     field :name, :string
     field :username, :string
     field :phone_number, :string
+    field :password, Comeonin.Ecto.Password
 
     has_many :contacts, Wiretap.Contacts.Contact
     has_many :calls, Wiretap.Calls.Call
@@ -18,8 +19,8 @@ defmodule Wiretap.Account.User do
 
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :username, :phone_number])
-    |> validate_required([:name, :username])
+    |> cast(attrs, [:name, :username, :phone_number, :password])
+    |> validate_required([:name, :username, :password])
     |> validate_length(:username, min: 1, max: 25)
     |> Formatters.format_phone_number()
   end

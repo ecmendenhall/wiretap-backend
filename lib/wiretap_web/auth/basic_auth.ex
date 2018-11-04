@@ -1,6 +1,5 @@
 defmodule WiretapWeb.Auth.BasicAuth do
   alias Plug.Conn
-  require Logger
 
   def init(opts) do
     opts

@@ -5,7 +5,8 @@ defmodule Wiretap.Factory do
     defaults = %{
       name: "Flop Chonkenton",
       username: "flopchonk",
-      phone_number: "+1 555 123 4567"
+      phone_number: "+1 555 123 4567",
+      password: "hunter2"
     }
     {:ok, user} = Account.create_user(Map.merge(defaults, attrs))
     user
