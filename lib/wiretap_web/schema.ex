@@ -10,6 +10,12 @@ defmodule WiretapWeb.Schema do
   end
 
   mutation do
+
+    field :signup, :session do
+      arg :input, non_null(:user_input)
+      resolve &Resolvers.Auth.signup/3
+    end
+
     field :login, :session do
       arg :username, non_null(:string)
       arg :password, non_null(:string)
@@ -27,6 +33,13 @@ defmodule WiretapWeb.Schema do
       middleware WiretapWeb.Auth.Middleware
       resolve &Resolvers.Call.start_call/3
     end
+  end
+
+  input_object :user_input do
+    field :username, non_null(:string)
+    field :password, non_null(:string)
+    field :name, :string
+    field :phone_number, :string
   end
 
   input_object :call_input do

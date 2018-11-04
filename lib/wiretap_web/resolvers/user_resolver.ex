@@ -1,10 +1,10 @@
 defmodule WiretapWeb.Resolvers.User do
-  alias Wiretap.Account
   alias Wiretap.Account.User
   alias Wiretap.Repo
 
-  def resolve_user(_, _, _) do
-    {:ok, Account.get_last_user}
+  def resolve_user(_, _, %{context: context}) do
+    %{current_user: user} = context
+    {:ok, user}
   end
 
   def user_contacts(%User{} = user, _, _) do
