@@ -14,11 +14,12 @@ defmodule WiretapWeb.Resolvers.ContactTest do
     }
     """
     test "creates a contact", %{conn: conn} do
-      Factory.user()
+      user = Factory.user()
       contact = %{
         "name" => "New Contact",
         "phoneNumber" => "+1 555 222 1234"
       }
+      conn = auth_user(conn, user)
       conn = post conn, "/api/graphql", %{
         query: @query,
         variables: %{

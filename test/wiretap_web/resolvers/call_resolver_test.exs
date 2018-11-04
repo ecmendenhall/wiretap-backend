@@ -101,13 +101,15 @@ defmodule WiretapWeb.Resolvers.CallTest do
       call_input = %{
         "contactId" => contact.id
       }
+      user = contact.user
+      conn = auth_user(conn, user)
       conn = post conn, "/api/graphql", %{
         query: @query,
         variables: %{
           "callInput" => call_input
         }
       }
-      user = contact.user |> Repo.preload([:calls])
+      user = Repo.preload(user, [:calls])
       [call] = user.calls
       assert json_response(conn, 200)["data"] == %{
         "startCall" => %{
