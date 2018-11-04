@@ -18,6 +18,7 @@ defmodule WiretapWeb.Resolvers.UserTest do
     """
     test "returns user", %{conn: conn} do
       user = Factory.user()
+      conn = auth_user(conn, user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{
@@ -45,6 +46,7 @@ defmodule WiretapWeb.Resolvers.UserTest do
     """
     test "returns contacts", %{conn: conn} do
       contact = Factory.contact() |> Repo.preload(:user)
+      conn = auth_user(conn, contact.user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{

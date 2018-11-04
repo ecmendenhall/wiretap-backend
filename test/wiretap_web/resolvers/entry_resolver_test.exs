@@ -21,6 +21,8 @@ defmodule WiretapWeb.Resolvers.EntryTest do
     """
     test "returns feed entries", %{conn: conn} do
       entry = Factory.entry() |> Repo.preload([:feed, :call])
+      feed = entry.feed |> Repo.preload([:user])
+      conn = auth_user(conn, feed.user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{

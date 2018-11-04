@@ -21,6 +21,7 @@ defmodule WiretapWeb.Resolvers.FeedTest do
     """
     test "returns feed", %{conn: conn} do
       feed = Factory.feed() |> Repo.preload(:user)
+      conn = auth_user(conn, feed.user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{
@@ -46,6 +47,8 @@ defmodule WiretapWeb.Resolvers.FeedTest do
     """
     test "returns feed entries", %{conn: conn} do
       entry = Factory.entry() |> Repo.preload(:feed)
+      feed = entry.feed |> Repo.preload(:user)
+      conn = auth_user(conn, feed.user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{

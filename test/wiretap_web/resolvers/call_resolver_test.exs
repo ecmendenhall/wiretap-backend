@@ -24,6 +24,7 @@ defmodule WiretapWeb.Resolvers.CallTest do
         recording_url: "https://example.com/recording.mp3",
         sid: "abc123"
       })
+      conn = auth_user(conn, call.user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{
@@ -49,6 +50,7 @@ defmodule WiretapWeb.Resolvers.CallTest do
     """
     test "returns call user", %{conn: conn} do
       call = Factory.call() |> Repo.preload(:user)
+      conn = auth_user(conn, call.user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{
@@ -72,6 +74,7 @@ defmodule WiretapWeb.Resolvers.CallTest do
     """
     test "returns call contact", %{conn: conn} do
       call = Factory.call() |> Repo.preload([:user, :contact])
+      conn = auth_user(conn, call.user)
       conn = post conn, "/api/graphql", %{query: @query}
       assert json_response(conn, 200)["data"] == %{
         "user" => %{

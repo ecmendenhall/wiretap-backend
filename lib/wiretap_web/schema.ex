@@ -4,6 +4,7 @@ defmodule WiretapWeb.Schema do
 
   query do
     field :user, :user do
+      middleware WiretapWeb.Auth.Middleware
       resolve &Resolvers.User.resolve_user/3
     end
   end
