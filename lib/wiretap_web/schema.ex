@@ -4,8 +4,56 @@ defmodule WiretapWeb.Schema do
 
   query do
     field :user, :user do
+      middleware WiretapWeb.Auth.Middleware
       resolve &Resolvers.User.resolve_user/3
     end
+  end
+
+  mutation do
+
+    field :signup, :session do
+      arg :input, non_null(:user_input)
+      resolve &Resolvers.Auth.signup/3
+    end
+
+    field :login, :session do
+      arg :username, non_null(:string)
+      arg :password, non_null(:string)
+      resolve &Resolvers.Auth.login/3
+    end
+
+    field :create_contact, :contact do
+      arg :input, non_null(:contact_input)
+      middleware WiretapWeb.Auth.Middleware
+      resolve &Resolvers.Contact.create_contact/3
+    end
+
+    field :start_call, :call do
+      arg :input, non_null(:call_input)
+      middleware WiretapWeb.Auth.Middleware
+      resolve &Resolvers.Call.start_call/3
+    end
+  end
+
+  input_object :user_input do
+    field :username, non_null(:string)
+    field :password, non_null(:string)
+    field :name, :string
+    field :phone_number, :string
+  end
+
+  input_object :call_input do
+    field :contact_id, non_null(:id)
+  end
+
+  input_object :contact_input do
+    field :name, non_null(:string)
+    field :phone_number, non_null(:string)
+  end
+
+  object :session do
+    field :token, :string
+    field :user, :user
   end
 
   object :user do

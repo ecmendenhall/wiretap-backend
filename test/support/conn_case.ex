@@ -23,6 +23,12 @@ defmodule WiretapWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint WiretapWeb.Endpoint
+
+      defp auth_user(conn, user) do
+        token = WiretapWeb.Auth.TokenAuth.generate_token(user)
+        put_req_header(conn, "authorization", "Bearer #{token}")
+      end
+
     end
   end
 

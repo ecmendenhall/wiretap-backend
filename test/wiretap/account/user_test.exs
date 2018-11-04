@@ -42,6 +42,12 @@ defmodule Wiretap.Account.UserTest do
       assert %{username: ["can't be blank"]} = errors_on(changeset)
     end
 
+    test "requires password" do
+      changeset = User.changeset(%User{}, %{name: "Flop Chonkenton"})
+      refute changeset.valid?
+      assert %{password: ["can't be blank"]} = errors_on(changeset)
+    end
+
     test "username max length" do
       changeset = User.changeset(%User{}, %{
         name: "Flop Chonkenton",
@@ -55,6 +61,7 @@ defmodule Wiretap.Account.UserTest do
       changeset = User.changeset(%User{}, %{
         name: "Flop Chonkenton",
         username: "flopchonk",
+        password: "hunter2",
         phone_number: "1 (555) 555-3226"
       })
       assert %Ecto.Changeset{changes: changes} = changeset
