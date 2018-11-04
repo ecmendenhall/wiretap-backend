@@ -1,16 +1,13 @@
 defmodule WiretapWeb.Auth.TokenAuth do
-  alias Comeonin.Ecto.Password
-  alias Wiretap.Account
-
-  @salt "users"
+  @namespace "users"
 
   def generate_token(user) do
     data = %{id: user.id}
-    Phoenix.Token.sign(WiretapWeb.Endpoint, @salt, data)
+    Phoenix.Token.sign(WiretapWeb.Endpoint, @namespace, data)
   end
 
   def verify(token) do
-    Phoenix.Token.verify(WiretapWeb.Endpoint, @salt, token, [
+    Phoenix.Token.verify(WiretapWeb.Endpoint, @namespace, token, [
       max_age: 365 * 24 * 3600
     ])
   end

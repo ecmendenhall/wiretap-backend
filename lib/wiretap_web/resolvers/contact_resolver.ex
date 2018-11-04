@@ -1,6 +1,5 @@
 defmodule WiretapWeb.Resolvers.Contact do
   alias Wiretap.Contacts
-  alias Wiretap.Repo
 
   def create_contact(_, %{input: params}, %{context: context}) do
     %{current_user: user} = context
