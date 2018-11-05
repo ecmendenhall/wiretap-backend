@@ -7,7 +7,7 @@ defmodule WiretapWeb.Resolvers.Auth do
   end
 
   def signup(_, %{input: params}, _) do
-    {:ok, _} = Wiretap.Account.create_user(params)
+    {:ok, user} = Wiretap.Account.create_user(params)
     authenticate(params)
   end
 
