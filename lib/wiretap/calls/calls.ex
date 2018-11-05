@@ -49,7 +49,7 @@ defmodule Wiretap.Calls do
     hostname = Application.get_env(:wiretap, :hostname)
     username = Application.get_env(:wiretap, :twilio_basic_auth_username)
     password = Application.get_env(:wiretap, :twilio_basic_auth_password)
-    "http://#{username}:#{password}@#{hostname}"
+    "https://#{username}:#{password}@#{hostname}"
   end
 
 end
