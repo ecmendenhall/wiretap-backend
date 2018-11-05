@@ -10,8 +10,8 @@ defmodule WiretapWeb.Router do
     plug :accepts, ["json"]
     plug WiretapWeb.Auth.BasicAuth,
       realm: "wiretap",
-      username: "twilio",
-      password: "test-password"
+      username: Application.get_env(:wiretap, :twilio_basic_auth_username),
+      password: Application.get_env(:wiretap, :twilio_basic_auth_password)
   end
 
   pipeline :feeds do
