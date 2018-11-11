@@ -19,6 +19,12 @@ defmodule Wiretap.Feeds do
     |> Repo.insert
   end
 
+  def update_entry(%Entry{} = entry, attrs) do
+    entry
+    |> Entry.changeset(attrs)
+    |> Repo.update()
+  end
+
   def get_entry(id) do
     Repo.get!(Entry, id)
   end

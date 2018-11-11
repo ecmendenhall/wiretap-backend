@@ -7,6 +7,7 @@ defmodule Wiretap.Feeds.Entry do
     field :summary, :string, default: ""
     field :keywords, :string, default: ""
     field :is_explicit, :boolean, default: false
+    field :published, :boolean, default: false
 
     belongs_to :feed, Wiretap.Feeds.Feed
     has_one :call, Wiretap.Calls.Call
@@ -16,7 +17,7 @@ defmodule Wiretap.Feeds.Entry do
 
   def changeset(call, attrs) do
     call
-    |> cast(attrs, [:title, :summary, :keywords, :is_explicit])
+    |> cast(attrs, [:title, :summary, :keywords, :is_explicit, :published])
   end
 
 end

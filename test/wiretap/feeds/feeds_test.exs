@@ -5,7 +5,7 @@ defmodule Wiretap.Feeds.FeedsTest do
   alias Wiretap.Feeds
   alias Wiretap.Feeds.{Feed, Entry}
 
-  describe "creating a feed" do
+  describe "feeds" do
 
     test "creates a feed" do
       user = Factory.user()
@@ -24,7 +24,7 @@ defmodule Wiretap.Feeds.FeedsTest do
     end
   end
 
-  describe "creating an entry" do
+  describe "entries" do
 
     test "creates an entry" do
       call = Factory.call()
@@ -42,6 +42,30 @@ defmodule Wiretap.Feeds.FeedsTest do
       assert entry.summary == "What's up hot dog?"
       assert entry.keywords == "flop, chonk, hot, dog"
       assert entry.is_explicit
+    end
+
+    test "updates an entry" do
+      call = Factory.call()
+      feed = Factory.feed(%{}, call.user)
+      {:ok, entry} = Feeds.create_entry(%{
+        title: "Flop Chonkenton's Feed",
+        summary: "What's up hot dog?",
+        keywords: "flop, chonk, hot, dog",
+        is_explicit: true
+      }, feed, call)
+      {:ok, entry} = Feeds.update_entry(entry, %{
+        title: "Updated title",
+        summary: "Updated summary",
+        keywords: "updated, keywords",
+        is_explicit: false
+      })
+      assert %Entry{} = entry
+      assert entry.feed.id == feed.id
+      assert entry.call.id == call.id
+      assert entry.title == "Updated title"
+      assert entry.summary == "Updated summary"
+      assert entry.keywords == "updated, keywords"
+      refute entry.is_explicit
     end
   end
 

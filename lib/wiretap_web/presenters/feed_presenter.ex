@@ -8,7 +8,7 @@ defmodule WiretapWeb.Presenters.FeedPresenter do
 
   def gather_attrs(%User{} = user) do
     user = Repo.preload(user, :feed)
-    feed = Repo.preload(user.feed, :entries)
+    feed = Repo.preload(user.feed, entries: Feed.published_entries)
     %{
       feed: %{
         title: title(user, feed),

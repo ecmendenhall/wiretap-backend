@@ -22,7 +22,7 @@ config :wiretap,
   twilio_account_sid: "test-twilio-account-sid",
   twilio_auth_token: "test-twilio-auth-token",
   twilio_outgoing_number: "+15207294567",
-  twilio_username: "twilio",
-  twilio_password: "test-password"
+  twilio_basic_auth_username: "twilio",
+  twilio_basic_auth_password: "test-password"
 
 config :bcrypt_elixir, :log_rounds, 4

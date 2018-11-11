@@ -37,4 +37,44 @@ defmodule WiretapWeb.Resolvers.EntryTest do
       }
     end
   end
+
+  describe "updating an entry" do
+
+    @query """
+    mutation($id: String!, $entryInput: EntryInput!) {
+      updateEntry(id: $id, input: $entryInput) {
+        title
+        summary
+        keywords
+        is_explicit
+      }
+    }
+    """
+    test "updates an entry", %{conn: conn} do
+      entry = Factory.entry() |> Repo.preload([:feed, :call])
+      feed = entry.feed |> Repo.preload([:user])
+      updated_attrs = %{
+        title: "Updated title",
+        summary: "Updated summary",
+        keywords: "updated, keywords",
+        is_explicit: true
+      }
+      conn = auth_user(conn, feed.user)
+      conn = post conn, "/api/graphql", %{
+        query: @query,
+        variables: %{
+          "id" => entry.id,
+          "entryInput" => updated_attrs
+        }
+      }
+      assert json_response(conn, 200)["data"] == %{
+        "updateEntry" => %{
+          "title" => "Updated title",
+          "summary" => "Updated summary",
+          "keywords" => "updated, keywords",
+          "is_explicit" => true
+        }
+      }
+    end
+  end
 end
