@@ -69,6 +69,7 @@ defmodule WiretapWeb.Schema do
     field :summary, :string
     field :keywords, :string
     field :is_explicit, :boolean
+    field :published, :boolean
   end
 
   input_object :feed_input do
