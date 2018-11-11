@@ -22,6 +22,28 @@ defmodule Wiretap.Feeds.FeedsTest do
       assert feed.keywords == "flop, chonk, hot, dog"
       assert feed.is_explicit
     end
+
+    test "updatess a feed" do
+      user = Factory.user()
+      {:ok, feed} = Feeds.create_feed(%{
+        title: "Flop Chonkenton's Feed",
+        summary: "What's up hot dog?",
+        keywords: "flop, chonk, hot, dog",
+        is_explicit: true
+      }, user)
+      {:ok, feed} = Feeds.update_feed(feed, %{
+        title: "Updated title",
+        summary: "Updated summary",
+        keywords: "updated, keywords",
+        is_explicit: false
+      })
+      assert %Feed{} = feed
+      assert feed.user == user
+      assert feed.title == "Updated title"
+      assert feed.summary == "Updated summary"
+      assert feed.keywords == "updated, keywords"
+      refute feed.is_explicit
+    end
   end
 
   describe "entries" do

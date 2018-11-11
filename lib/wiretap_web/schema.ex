@@ -34,6 +34,12 @@ defmodule WiretapWeb.Schema do
       resolve &Resolvers.Call.start_call/3
     end
 
+    field :update_feed, :feed do
+      arg :input, non_null(:feed_input)
+      middleware WiretapWeb.Auth.Middleware
+      resolve &Resolvers.Feed.update_feed/3
+    end
+
     field :update_entry, :entry do
       arg :id, non_null(:id)
       arg :input, non_null(:entry_input)
@@ -59,6 +65,13 @@ defmodule WiretapWeb.Schema do
   end
 
   input_object :entry_input do
+    field :title, :string
+    field :summary, :string
+    field :keywords, :string
+    field :is_explicit, :boolean
+  end
+
+  input_object :feed_input do
     field :title, :string
     field :summary, :string
     field :keywords, :string

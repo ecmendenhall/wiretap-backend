@@ -60,5 +60,40 @@ defmodule WiretapWeb.Resolvers.FeedTest do
         }
       }
     end
+
+    @query """
+    mutation($feedInput: FeedInput!) {
+      updateFeed(input: $feedInput) {
+        title
+        summary
+        keywords
+        is_explicit
+      }
+    }
+    """
+    test "updates a feed", %{conn: conn} do
+      feed = Factory.feed() |> Repo.preload([:user])
+      updated_attrs = %{
+        title: "Updated title",
+        summary: "Updated summary",
+        keywords: "updated, keywords",
+        is_explicit: true
+      }
+      conn = auth_user(conn, feed.user)
+      conn = post conn, "/api/graphql", %{
+        query: @query,
+        variables: %{
+          "feedInput" => updated_attrs
+        }
+      }
+      assert json_response(conn, 200)["data"] == %{
+        "updateFeed" => %{
+          "title" => "Updated title",
+          "summary" => "Updated summary",
+          "keywords" => "updated, keywords",
+          "is_explicit" => true
+        }
+      }
+    end
   end
 end
