@@ -120,7 +120,7 @@ defmodule WiretapWeb.Schema do
     field :summary, :string
     field :keywords, :string
     field :is_explicit, :boolean
-    feild :published, :boolean
+    field :published, :boolean
 
     field :call, :call do
       resolve &Resolvers.Entry.entry_call/3
