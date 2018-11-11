@@ -35,6 +35,7 @@ defmodule WiretapWeb.Endpoint do
     key: "_wiretap_key",
     signing_salt: "qxzq+Gki"
 
+  plug CORSPlug, origin: ["http://localhost:3000"]
   plug WiretapWeb.Router
 
   @doc """
