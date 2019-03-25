@@ -29,7 +29,7 @@ defmodule WiretapWeb.Schema do
     end
 
     field :start_call, :call do
-      arg :input, non_null(:call_input)
+      arg :input, :call_input
       middleware WiretapWeb.Auth.Middleware
       resolve &Resolvers.Call.start_call/3
     end

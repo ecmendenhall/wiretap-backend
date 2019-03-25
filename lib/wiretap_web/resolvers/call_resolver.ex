@@ -21,4 +21,13 @@ defmodule WiretapWeb.Resolvers.Call do
     {:ok, call}
   end
 
+  def start_call(_, _, %{context: context}) do
+    %{current_user: user} = context
+    user = Repo.preload(user, :contacts)
+    contact = Enum.random(user.contacts)
+    {:ok, call} = Wiretap.Calls.create_call(user, contact)
+    Wiretap.Calls.start(call)
+    {:ok, call}
+  end
+
 end

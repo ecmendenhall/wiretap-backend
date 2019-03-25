@@ -19,7 +19,7 @@ defmodule WiretapWeb.Presenters.FeedPresenterTest do
         title: "Flop Chonkenton's Feed",
         link: "/feeds/flopchonk",
         image: "https://www.placecage.com/600/600.jpg",
-        copyright: "Copyright Flop Chonkenton 2018",
+        copyright: "Copyright Flop Chonkenton 2019",
         author: "Flop Chonkenton",
         summary: "Just another cool feed",
         explicit: "No",
